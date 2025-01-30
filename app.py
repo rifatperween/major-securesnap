@@ -53,79 +53,151 @@ def index():
     <title>Secure Image Processor</title>
 
     <style>
-    body{
-  background-color:#0A1828;
-  background-size: cover;
-  background-position: center;
-  color:#BFA181;
-  font-family: 'Trebuchet MS', sans-serif; 
-}
+        body {
+            background-color: #0A1828;
+            background-size: cover;
+            background-position: center;
+            font-family: 'Trebuchet MS', sans-serif;
+        }
 
-.typed-out{
-  overflow: hidden;
-  border-right: .15em solid orange;
-  white-space: nowrap;
-  animation: typing 1s steps(10, end) forwards, blinking .8s infinite;
-  font-size: 1.8rem;
-  width: 0;
-}
-@keyframes typing {
-  from { width: 0 }
-  to { width: 37% }
-}
-@keyframes blinking {
-  from { border-color: transparent }
-  to { border-color: blue; }
-}
+        .typed-out {
+            overflow: hidden;
+            border-right: .15em solid blue;
+            white-space: nowrap;
+            animation: typing 1s steps(10, end) forwards, blinking .8s infinite;
+            font-size: 1.8rem;
+            width: 0;
+            display: inline-block;
+        }
 
-header{
-text-align: center;
-margin-bottom:8px;
-# background: linear-gradient(to right, #243949, #517fa4);
-padding: 10rem;
-}
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 22% }
+        }
 
+        @keyframes blinking {
+            from { border-color: transparent }
+            to { border-color: blue; }
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 8px;
+            color: #BFA181;
+            padding: 10rem;
+        }
+
+        h1 {
+            letter-spacing: 10px;
+            font-size: 4rem;
+        }
+
+        .typed-container {
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            gap: 10rem;
+            flex-wrap: wrap;
+        }
+
+        section {
+            flex: 1;
+            max-width: 500px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        form {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+            transition: box-shadow 0.3s ease-in-out, transform 0.3s ease;
+        }
+
+        form:hover {
+            box-shadow: 0px 6px 16px rgba(191, 161, 129, 0.6);
+            transform: translateY(-4px);
+        }
+
+        button {
+            transition: all 0.3s ease-in-out;
+            font-weight: bold;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.3);
+        }
+
+        .encrypt-btn {
+            background-color: #2563EB;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 6px;
+        }
+
+        .encrypt-btn:hover {
+            background-color: #1E40AF;
+        }
+
+        .decrypt-btn {
+            background-color: #16A34A;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 6px;
+        }
+
+        .decrypt-btn:hover {
+            background-color: #15803D;
+        }
     </style>
-
 </head>
 <body>
-   
-        <header>
-            <h1 class="text-5xl font-bold">SecureSnap</h1>
-            <p class="text-lg">Protect your images with military-grade encryption</p>
-            <div class="typed-out">Pixel Slice Stich</div>
-        </header>
- <div class="container mx-auto p-8">
-        <section class="mb-12">
-            <h2 class="text-2xl font-semibold mb-4">Encrypt an Image</h2>
-            <form id="encrypt-form" method="POST" action="/upload" enctype="multipart/form-data" class="bg-white p-6 rounded shadow">
-                <label class="block mb-2 font-medium text-gray">Upload Image:</label>
-                <input type="file" name="encrypt-file" accept="image/*" class="mb-4 block w-full border border-gray-300 p-2 rounded" required>
+    <header>
+        <h1 class="text-5xl font-bold">SecureSnap</h1>
+        <p class="text-lg">Protect your images with military-grade encryption</p>
+        <div class="typed-container">
+            <div class="typed-out">Pixel Slice Stitch</div>
+        </div>
+    </header>
 
-                <label class="block mb-2 font-medium">Security Key:</label>
-                <input type="text" name="key" class="mb-4 block w-full border border-gray-300 p-2 rounded text-gray-900" required>
+    <div class="container mx-auto p-8 text-gray-900">
+        <div class="container">
+            <section>
+                <h2 class="text-2xl font-semibold mb-4 text-[#BFA181]">Encrypt an Image</h2>
+                <form id="encrypt-form" method="POST" action="/upload" enctype="multipart/form-data">
+                    <svg width="50" height="50" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="mx-auto mb-4">
+                        <path d="M12 2C8.13 2 5 5.13 5 9V12H4C2.89 12 2 12.89 2 14V20C2 21.11 2.89 22 4 22H20C21.11 22 22 21.11 22 20V14C22 12.89 21.11 12 20 12H19V9C19 5.13 15.87 2 12 2ZM12 4C14.76 4 17 6.24 17 9V12H7V9C7 6.24 9.24 4 12 4Z" fill="#2563EB"/>
+                    </svg>
+                    <label class="block mb-2 font-medium text-gray">Upload Image:</label>
+                    <input type="file" name="encrypt-file" accept="image/*" class="mb-4 block w-full border border-gray-300 p-2 rounded" required>
+                    <label class="block mb-2 font-medium">Security Key:</label>
+                    <input type="password" name="key" class="mb-4 block w-full border border-gray-300 p-2 rounded text-gray-900" placeholder="Enter your security key" required>
+                    <button type="submit" class="encrypt-btn">Encrypt</button>
+                </form>
+                <div id="encrypt-result" class="mt-4"></div>
+            </section>
 
-                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Encrypt</button>
-            </form>
-            <div id="encrypt-result" class="mt-4"></div>
-        </section>
-
-        <section class="mb-12">
-            <h2 class="text-2xl font-semibold mb-4">Decrypt an Image</h2>
-            <form id="decrypt-form" method="POST" action="/decrypt" enctype="multipart/form-data" class="bg-white p-6 rounded shadow">
-                <label class="block mb-2 font-medium">Upload Encrypted File:</label>
-                <input type="file" name="decrypt-file" accept="application/octet-stream" class="mb-4 block w-full border border-gray-300 p-2 rounded" required>
-
-                <label class="block mb-2 font-medium">Security Key:</label>
-                <input type="text" name="key" class="mb-4 block w-full border border-gray-300 p-2 rounded" required>
-
-                <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded">Decrypt</button>
-            </form>
-            <div id="decrypt-result" class="mt-4"></div>
-        </section>
-
-        <footer class="text-center mt-12">
-            <p class="text-md">Created by Your Team</p>
+            <section>
+                <h2 class="text-2xl font-semibold mb-4 text-[#BFA181]">Decrypt an Image</h2>
+                <form id="decrypt-form" method="POST" action="/decrypt" enctype="multipart/form-data">
+                    <svg width="50" height="50" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="mx-auto mb-4">
+                        <path d="M12 2C8.13 2 5 5.13 5 9V12H4C2.89 12 2 12.89 2 14V20C2 21.11 2.89 22 4 22H20C21.11 22 22 21.11 22 20V14C22 12.89 21.11 12 20 12H19V9C19 5.13 15.87 2 12 2ZM12 4C14.76 4 17 6.24 17 9V12H7V9C7 6.24 9.24 4 12 4Z" fill="#16A34A"/>
+                    </svg>
+                    <label class="block mb-2 font-medium">Upload Encrypted File:</label>
+                    <input type="file" name="decrypt-file" accept="application/octet-stream" class="mb-4 block w-full border border-gray-300 p-2 rounded" required>
+                    <label class="block mb-2 font-medium">Security Key:</label>
+                    <input type="password" name="key" class="mb-4 block w-full border border-gray-300 p-2 rounded" placeholder="Enter your security key" required>
+                    <button type="submit" class="decrypt-btn">Decrypt</button>
+                </form>
+                <div id="decrypt-result" class="mt-4"></div>
+            </section>
+        </div>
+        <footer class="text-center mt-2 text-[#BFA181]">
+            <p class="text-md">Created with ❤️ by SecureSnap Team</p>
         </footer>
     </div>
 </body>
